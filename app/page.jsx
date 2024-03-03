@@ -3,12 +3,11 @@ import Results from "@/components/Results";
 
 export default async function page({ searchParams }) {
   const genre = searchParams.genre || "fetchTrending";
-
   const res = await fetch(
     `https://api.themoviedb.org/3${
       genre === "fetchTopRated" ? `/movie/top_rated` : `/trending/all/week`
     }?api_key=${API_KEY}`,
-    { next: { revalidate: 10 } }
+    { next: { revalidate: 2000 } }
   );
 
   const data = await res.json();
