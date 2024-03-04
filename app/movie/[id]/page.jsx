@@ -4,10 +4,14 @@ import Image from "next/image";
 export default async function page({ params }) {
   const serchParams = params.id;
   const res = await axios.get(
-    `https://api.themoviedb.org/3/movie/${serchParams}?api_key=${process.env.API_KEY}`
+    `https://api.themoviedb.org/3/movie/${serchParams}`,
+    {
+      params: {
+        api_key: process.env.API_KEY,
+      },
+    }
   );
   const response = res.data;
-
   console.log("🚀 ~ page ~ response:", response);
 
   return (
